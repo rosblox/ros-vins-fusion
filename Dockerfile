@@ -11,10 +11,7 @@ COPY ceres-solver ceres-solver
 WORKDIR /ceres-solver/ceres-bin
 RUN cmake .. && make -j4 && make test && make install
 
-
-
 WORKDIR /catkin_ws/src
-
 COPY VINS-Fusion VINS-Fusion
 
 WORKDIR /catkin_ws
@@ -24,18 +21,7 @@ WORKDIR /
 COPY resources/ros_entrypoint.sh .
 
 
-# # Download test bag
-# ARG GDRIVE_BAGFILE_ID="1s05tBQOLNEDDurlg48KiUWxCp-YqYyGH"
-# ARG GDRIVE_BAGFILE_NAME="nsh_indoor_outdoor.bag"
-# ENV GDRIVE_BAGFILE_NAME=${GDRIVE_BAGFILE_NAME}
-
-# RUN wget -q --load-cookies /tmp/cookies.txt \ 
-#     "https://docs.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://docs.google.com/uc?export=download&id=$GDRIVE_BAGFILE_ID' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=$GDRIVE_BAGFILE_ID" -O $GDRIVE_BAGFILE_NAME && rm -rf /tmp/cookies.txt
-
-# https://www.dropbox.com/s/s29oygyhwmllw9k/ar_box.bag?dl=0
-
-
 WORKDIR /catkin_ws
 
 RUN echo 'alias build="catkin_make --cmake-args -DCMAKE_BUILD_TYPE=Release"' >> ~/.bashrc
-RUN echo 'alias run="roslaunch aloam_velodyne docker_aloam_velodyne_VLP_16.launch"' >> ~/.bashrc
+RUN echo 'alias run="rosrun vins vins_node /catkin_ws/src/VINS-Fusion/config/euroc/euroc_stereo_imu_config.yaml"' >> ~/.bashrc
