@@ -1,0 +1,6 @@
+[submodule "ceres-solver"]
+	path = ceres-solver
+	url = https://ceres-solver.googlesource.com/ceres-solver
+[submodule "VINS-Fusion"]
+	path = VINS-Fusion
+	url = https://github.com/rosblox/VINS-Fusion.git
